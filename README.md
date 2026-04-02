@@ -1,23 +1,44 @@
+<div align="center">
+
 # 兄弟.skill
 
-> "真正的兄弟不是天天说漂亮话，是你出事的时候他真会出现。"
+<p><strong>bro-skill</strong></p>
 
-**把兄弟、死党、老朋友蒸馏成 AI Skill。**
+<p><em>“真正的兄弟不是天天说漂亮话，是你出事的时候他真会出现。”</em></p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Python%203.9%2B-blue.svg)](https://python.org)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
 
-&nbsp;
+</div>
 
-提供兄弟的原材料（微信聊天记录、QQ 消息、截图、照片、你自己的描述）  
-生成一个**真正像他**的 AI Skill  
-会按他的口头禅说话，记得你们一起干过的事，也保留他的嘴硬、幽默和边界感
+---
+
+<div align="center">
+
+同事跑了，你蒸馏同事。前任分了，你蒸馏前任。  
+但有没有想过，那个最适合被蒸馏成 AI Skill 的人，其实是你兄弟？
+
+他不一定天天夸你。  
+他可能嘴硬，可能损你，可能一到煽情就打岔。  
+但真轮到你出事的时候，他往往比漂亮话先到。
+
+**与其把兄弟停留在聊天记录里，不如把他蒸馏成一个可运行的 Skill。**
+
+提供他的聊天记录、截图、照片，再加上你对他的描述  
+我们会把他拆成一套可运行的结构：
+
+**Part A - Shared Memory（共享记忆） + Part B - Persona（人格模型）**
+
+生成一个能按他的口头禅说话、记得你们共同经历、  
+也保留他的嘴硬、幽默、义气和边界感的数字副本。
 
 ⚠️ **本项目仅用于个人记忆整理、创作式对话与关系回顾，不用于骚扰、冒充、跟踪或侵犯他人隐私。**
 
 [安装](#安装) · [使用](#使用) · [效果示例](#效果示例) · [English](README_EN.md)
+
+</div>
 
 ---
 

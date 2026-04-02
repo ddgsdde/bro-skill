@@ -1,21 +1,45 @@
+<div align="center">
+
 # bro-skill
 
-> "A real homie does not just say the right words. He actually shows up."
+<p><strong>兄弟.skill</strong></p>
 
-**Distill your brother, best friend, or longtime homie into an AI Skill.**
+<p><em>"A real homie does not just say the right words. He actually shows up."</em></p>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Python%203.9%2B-blue.svg)](https://python.org)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-blueviolet)](https://claude.ai/code)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-green)](https://agentskills.io)
 
-Provide source material from your friendship or brotherhood: chat logs, screenshots, photos, and your own descriptions.  
-Generate an AI Skill that actually feels like him.  
-It speaks in his tone, remembers what you went through together, and keeps his humor, sharpness, and boundaries.
+</div>
+
+---
+
+<div align="center">
+
+Your colleague leaves, so you distill a colleague.  
+Your ex is gone, so you distill an ex.  
+But what about the one person who might deserve distillation just as much: your bro?
+
+He may never say the perfect thing.  
+He may roast you, dodge sincerity, or act cool when things get heavy.  
+But when life actually hits, he tends to show up before the speeches do.
+
+**Instead of leaving that person trapped inside old chat logs, turn him into a runnable Skill.**
+
+Feed it chat history, screenshots, photos, and your own recollection  
+and it will deconstruct him into:
+
+**Part A - Shared Memory + Part B - Persona**
+
+A digital version that talks in his rhythm, remembers what you lived through together,  
+and keeps his humor, sharpness, loyalty, and boundaries intact.
 
 Warning: This project is for personal memory work, creative dialogue, and relationship reflection only. Do not use it for harassment, impersonation, stalking, or privacy violations.
 
 [Installation](#installation) · [Usage](#usage) · [Examples](#examples) · [中文](README.md)
+
+</div>
 
 ---
 
