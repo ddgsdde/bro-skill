@@ -26,10 +26,10 @@ Warning: This project is for personal memory work, creative dialogue, and relati
 ```bash
 # Install into the current repo
 mkdir -p .claude/skills
-git clone https://github.com/YOUR_NAME/bro-skill .claude/skills/bro-skill
+git clone https://github.com/ddgsdde/bro-skill .claude/skills/bro-skill
 
 # Or install globally
-git clone https://github.com/YOUR_NAME/bro-skill ~/.claude/skills/bro-skill
+git clone https://github.com/ddgsdde/bro-skill ~/.claude/skills/bro-skill
 ```
 
 ### Optional dependencies

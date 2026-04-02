@@ -8,19 +8,19 @@
 
 ```bash
 mkdir -p .claude/skills
-git clone https://github.com/YOUR_NAME/bro-skill .claude/skills/bro-skill
+git clone https://github.com/ddgsdde/bro-skill .claude/skills/bro-skill
 ```
 
 ### 全局安装
 
 ```bash
-git clone https://github.com/YOUR_NAME/bro-skill ~/.claude/skills/bro-skill
+git clone https://github.com/ddgsdde/bro-skill ~/.claude/skills/bro-skill
 ```
 
 ### OpenClaw 安装
 
 ```bash
-git clone https://github.com/YOUR_NAME/bro-skill ~/.openclaw/workspace/skills/bro-skill
+git clone https://github.com/ddgsdde/bro-skill ~/.openclaw/workspace/skills/bro-skill
 ```
 
 ---
