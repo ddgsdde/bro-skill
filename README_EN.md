@@ -37,6 +37,7 @@ A digital version that talks in his rhythm, remembers what you lived through tog
 and keeps his humor, sharpness, loyalty, and boundaries intact.
 
 Warning: This project is for personal memory work, creative dialogue, and relationship reflection only. Do not use it for harassment, impersonation, stalking, or privacy violations.
+Warning: The bundled WeChat database export path currently only works on **macOS arm64 + WeChat 4.x**, and requires **SIP to be disabled** via `csrutil disable`.
 
 [Installation](#installation) · [Usage](#usage) · [Examples](#examples) · [中文](README.md)
 
@@ -62,6 +63,21 @@ git clone https://github.com/ddgsdde/bro-skill ~/.claude/skills/bro-skill
 ```bash
 pip3 install -r requirements.txt
 ```
+
+### WeChat export prerequisites
+
+If you want to use the **bundled** WeChat database export workflow, make sure that:
+
+- you are on **macOS arm64**
+- you are using **WeChat 4.x**
+- SIP is disabled: `csrutil disable`
+
+If not, do not use the bundled exporter path directly. Use fallback inputs instead:
+
+- already exported txt
+- WeChatMsg
+- PyWxDump
+- Liuhen
 
 ---
 
@@ -132,7 +148,7 @@ bro-skill  ❯ then say it
 
 | Source | Format | Notes |
 |--------|--------|-------|
-| WeChat | WeChatMsg / Liuhen / PyWxDump export | Recommended, richest data |
+| WeChat | **Bundled `wechat-chat-exporter`** / WeChatMsg / Liuhen / PyWxDump export | Bundled path is best for deeper AI analysis, but only on macOS arm64 + WeChat 4.x + SIP disabled |
 | QQ | txt / mht export | Great for school-era friendships |
 | Social media | Screenshots | Public persona and expression patterns |
 | Photos | JPEG/PNG with EXIF | Timeline and location extraction |
@@ -168,6 +184,8 @@ bro-skill/
 ├── tools/
 ├── bros/
 ├── docs/PRD.md
+├── vendor/
+│   └── wechat-chat-exporter/
 ├── README.md
 ├── README_EN.md
 ├── INSTALL.md
@@ -177,6 +195,13 @@ bro-skill/
 
 For WeChat ingestion, this repo now ships with a **vendored** copy of `wechat-chat-exporter` under `vendor/wechat-chat-exporter/`.
 That means the default path is already bundled: export AI-friendly chat txt from decrypted databases, then let `bro-skill/tools/wechat_parser.py` generate higher-level relationship analysis.
+
+Important caveats:
+
+- this bundled export path is currently **macOS arm64 only**
+- it targets **WeChat 4.x**
+- it requires **SIP to be disabled** with `csrutil disable`
+- if your environment does not match, use other export tools as input instead
 
 ---
 

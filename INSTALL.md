@@ -48,6 +48,21 @@ vendor/wechat-chat-exporter/
 
 也就是说，`bro-skill` 本身已经带了微信导出后端，不需要再额外 clone 一份。
 
+### 重要前置条件
+
+内置微信导出器**不是全平台方案**。当前请明确按下面条件使用：
+
+- **只兼容 macOS arm64**
+- **只兼容微信 4.x**
+- **必须先禁用 SIP**：`csrutil disable`
+
+如果你不是这个环境，请不要直接走数据库导出链路，改用：
+
+- 已导出的 txt
+- WeChatMsg
+- PyWxDump
+- 留痕
+
 然后先用内置的 `wechat-chat-exporter` 完成：
 
 1. 密钥提取

@@ -36,6 +36,7 @@
 也保留他的嘴硬、幽默、义气和边界感的数字副本。
 
 ⚠️ **本项目仅用于个人记忆整理、创作式对话与关系回顾，不用于骚扰、冒充、跟踪或侵犯他人隐私。**
+⚠️ **内置微信导出链路目前仅兼容 macOS arm64 + 微信 4.x，且需要禁用 SIP（`csrutil disable`）。**
 
 [安装](#安装) · [使用](#使用) · [效果示例](#效果示例) · [English](README_EN.md)
 
@@ -63,6 +64,21 @@ git clone https://github.com/ddgsdde/bro-skill ~/.claude/skills/bro-skill
 ```bash
 pip3 install -r requirements.txt
 ```
+
+### 微信导出前置条件
+
+如果你要使用仓库**内置**的微信数据库导出链路，请先确认：
+
+- 仅兼容 **macOS arm64**
+- 仅面向 **微信 4.x**
+- 需要先禁用 SIP：`csrutil disable`
+
+如果你不满足这些条件，不要直接走内置微信导出器。建议改用：
+
+- 已导出的 txt
+- WeChatMsg
+- PyWxDump
+- 留痕
 
 ---
 
@@ -143,7 +159,7 @@ pip3 install -r requirements.txt
 
 | 来源 | 格式 | 备注 |
 |------|------|------|
-| 微信聊天记录 | WeChatMsg / 留痕 / PyWxDump 导出 | 推荐，信息最丰富 |
+| 微信聊天记录 | **内置 `wechat-chat-exporter`** / WeChatMsg / 留痕 / PyWxDump | 内置方案最适合 AI 深挖；但仅兼容 macOS arm64 + 微信 4.x + 已禁用 SIP |
 | QQ 聊天记录 | txt / mht 导出 | 适合学生时代或老朋友关系 |
 | 社交媒体截图 | 图片 | 提取公开人设、固定表达和生活线索 |
 | 照片 | JPEG/PNG（含 EXIF） | 提取时间线和地点 |
@@ -207,6 +223,8 @@ bro-skill/
 │   └── version_manager.py
 ├── bros/
 ├── docs/PRD.md
+├── vendor/
+│   └── wechat-chat-exporter/
 ├── requirements.txt
 └── LICENSE
 ```
@@ -214,6 +232,13 @@ bro-skill/
 其中微信链路已经**内置 vendored 版** `wechat-chat-exporter`：
 默认直接使用 [vendor/wechat-chat-exporter/](/Users/ddg/Documents/tongshi/bro-skill/vendor/wechat-chat-exporter) 里的脚本，
 先从解密后的微信数据库导出 AI 友好的 txt，再由 `bro-skill/tools/wechat_parser.py` 做关系深挖摘要。
+
+但这里要注意：
+
+- 这条内置导出链路目前**只兼容 macOS arm64**
+- 目标微信版本是 **微信 4.x**
+- 使用前需要**禁用 SIP**：`csrutil disable`
+- 如果你的环境不满足条件，请改用其他导出工具作为输入
 
 ---
 
