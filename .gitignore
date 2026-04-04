@@ -12,6 +12,12 @@ __pycache__/
 knowledge/
 *.db
 *.sqlite
+wechat_keys.json
+wechat_keys*.json
+decrypted/
+exported/
+exported_*/
+*_cleaned.txt
 
 # IDE
 .vscode/

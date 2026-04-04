@@ -33,7 +33,7 @@ def backup(base_dir: str, slug: str):
 
     os.makedirs(backup_dir, exist_ok=True)
 
-    for fname in ["memory.md", "persona.md", "SKILL.md", "meta.json"]:
+    for fname in ["memory.md", "persona.md", "self_model.md", "dynamics.md", "SKILL.md", "meta.json"]:
         src = os.path.join(skill_dir, fname)
         if os.path.exists(src):
             shutil.copy2(src, os.path.join(backup_dir, fname))
@@ -60,7 +60,7 @@ def rollback(base_dir: str, slug: str, version: str):
 
     backup(base_dir, slug)
 
-    for fname in ["memory.md", "persona.md", "SKILL.md", "meta.json"]:
+    for fname in ["memory.md", "persona.md", "self_model.md", "dynamics.md", "SKILL.md", "meta.json"]:
         src = os.path.join(target_dir, fname)
         dst = os.path.join(skill_dir, fname)
         if os.path.exists(src):

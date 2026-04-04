@@ -38,6 +38,39 @@ pip3 install -r requirements.txt
 
 ---
 
+## 微信推荐方案：内置 wechat-chat-exporter
+
+`bro-skill` 里的 `tools/wechat_parser.py` 已经默认对接仓库内置的：
+
+```text
+vendor/wechat-chat-exporter/
+```
+
+也就是说，`bro-skill` 本身已经带了微信导出后端，不需要再额外 clone 一份。
+
+然后先用内置的 `wechat-chat-exporter` 完成：
+
+1. 密钥提取
+2. 数据库解密
+3. 指定联系人导出
+
+再由 `bro-skill/tools/wechat_parser.py` 对导出的聊天进行二次分析，提炼：
+
+- 互动节奏
+- 互损风格
+- 帮忙/到场线索
+- 关心方式
+- 冲突模式
+- 用户本人触发他的方式
+
+如果你想覆盖默认后端，也可以额外设置：
+
+```bash
+export WECHAT_EXPORTER_DIR=/your/custom/wechat-chat-exporter
+```
+
+---
+
 ## 微信聊天记录导出指南
 
 要获取微信聊天记录，你需要使用第三方导出工具。以下是推荐的工具：

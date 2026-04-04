@@ -29,7 +29,8 @@
 提供他的聊天记录、截图、照片，再加上你对他的描述  
 我们会把他拆成一套可运行的结构：
 
-**Part A - Shared Memory（共享记忆） + Part B - Persona（人格模型）**
+**Part A - Shared Memory（共享记忆） + Part B - Persona（人格模型）**  
+**Part C - User Model（本人画像） + Part D - Relationship Dynamics（关系动力学）**
 
 生成一个能按他的口头禅说话、记得你们共同经历、  
 也保留他的嘴硬、幽默、义气和边界感的数字副本。
@@ -150,14 +151,16 @@ pip3 install -r requirements.txt
 
 ### 生成的 Skill 结构
 
-每个兄弟 Skill 由两部分组成，共同驱动输出：
+每个兄弟 Skill 由四部分组成，共同驱动输出：
 
 | 部分 | 内容 |
 |------|------|
 | **Part A — Shared Memory** | 共同经历、固定场子、inside jokes、冲突与和好、互相帮忙、关系时间线 |
 | **Part B — Persona** | 5 层性格结构：硬规则 → 身份 → 说话风格 → 处事方式 → 关系行为 |
+| **Part C — User Model** | 用户本人的表达习惯、关系位置、会触发他哪些反应 |
+| **Part D — Relationship Dynamics** | 谁主动、谁收尾、何时互损、何时认真、谁更会兜底 |
 
-运行逻辑：`收到消息 → Persona 判断他会怎么回 → Memory 补充共同记忆 → 用他的方式输出`
+运行逻辑：`收到消息 → Persona 判断他会怎么回 → User Model 判断他面对你会怎么回 → Dynamics 判断关系机制 → Memory 补充共同记忆 → 用他的方式输出`
 
 ### 支持的标签
 
@@ -172,6 +175,7 @@ pip3 install -r requirements.txt
 * **追加记忆** → 找到更多聊天记录/照片 → 自动分析增量 → merge 进对应部分
 * **对话纠正** → 说“他不会这样说” → 写入 Correction 层，立即生效
 * **版本管理** → 每次更新自动存档，支持回滚
+* **自动深挖** → 微信推荐通过 `wechat-chat-exporter` 导出，再自动提炼互动节奏、关心方式、互损与冲突模式
 
 ---
 
@@ -186,8 +190,12 @@ bro-skill/
 │   ├── intake.md
 │   ├── memory_analyzer.md
 │   ├── persona_analyzer.md
+│   ├── self_analyzer.md
+│   ├── dynamics_analyzer.md
 │   ├── memory_builder.md
 │   ├── persona_builder.md
+│   ├── self_builder.md
+│   ├── dynamics_builder.md
 │   ├── merger.md
 │   └── correction_handler.md
 ├── tools/
@@ -202,6 +210,10 @@ bro-skill/
 ├── requirements.txt
 └── LICENSE
 ```
+
+其中微信链路已经**内置 vendored 版** `wechat-chat-exporter`：
+默认直接使用 [vendor/wechat-chat-exporter/](/Users/ddg/Documents/tongshi/bro-skill/vendor/wechat-chat-exporter) 里的脚本，
+先从解密后的微信数据库导出 AI 友好的 txt，再由 `bro-skill/tools/wechat_parser.py` 做关系深挖摘要。
 
 ---
 

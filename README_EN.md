@@ -30,7 +30,8 @@ But when life actually hits, he tends to show up before the speeches do.
 Feed it chat history, screenshots, photos, and your own recollection  
 and it will deconstruct him into:
 
-**Part A - Shared Memory + Part B - Persona**
+**Part A - Shared Memory + Part B - Persona**  
+**Part C - User Model + Part D - Relationship Dynamics**
 
 A digital version that talks in his rhythm, remembers what you lived through together,  
 and keeps his humor, sharpness, loyalty, and boundaries intact.
@@ -139,14 +140,16 @@ bro-skill  ❯ then say it
 
 ### Skill architecture
 
-Each generated bro Skill has two cooperating parts:
+Each generated bro Skill has four cooperating parts:
 
 | Part | Purpose |
 |------|---------|
 | **Part A — Shared Memory** | Shared experiences, places, inside jokes, conflicts, mutual support, timeline |
 | **Part B — Persona** | 5-layer structure: hard rules, identity, speaking style, way of doing things, relationship behavior |
+| **Part C — User Model** | How the user talks, their role in the bond, and what patterns they trigger in him |
+| **Part D — Relationship Dynamics** | Who initiates, who repairs, when joking turns serious, and who actually shows up |
 
-Runtime logic: `incoming message -> Persona decides how he would respond -> Memory adds shared context -> output in his voice`
+Runtime logic: `incoming message -> Persona decides how he would respond -> User Model adapts that to you -> Dynamics applies the relationship engine -> Memory adds shared context -> output in his voice`
 
 ### Evolution
 
@@ -171,6 +174,9 @@ bro-skill/
 ├── requirements.txt
 └── LICENSE
 ```
+
+For WeChat ingestion, this repo now ships with a **vendored** copy of `wechat-chat-exporter` under `vendor/wechat-chat-exporter/`.
+That means the default path is already bundled: export AI-friendly chat txt from decrypted databases, then let `bro-skill/tools/wechat_parser.py` generate higher-level relationship analysis.
 
 ---
 

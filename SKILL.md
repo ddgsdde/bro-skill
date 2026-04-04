@@ -1,6 +1,6 @@
 ---
 name: create-bro
-description: Distill a brother, best friend, or longtime homie into an AI Skill. Import chat logs, photos, screenshots, and recollections to generate Shared Memory + Persona, with continuous evolution. | 把兄弟、死党、老朋友蒸馏成 AI Skill。导入聊天记录、照片、截图和口述，生成 Shared Memory + Persona，并支持持续进化。
+description: Distill a brother, best friend, or longtime homie into an AI Skill. Import chat logs, photos, screenshots, and recollections to generate Shared Memory + Persona + User Model + Relationship Dynamics, with continuous evolution. | 把兄弟、死党、老朋友蒸馏成 AI Skill。导入聊天记录、照片、截图和口述，生成 Shared Memory + Persona + User Model + Relationship Dynamics，并支持持续进化。
 argument-hint: [bro-name-or-slug]
 version: 1.0.0
 user-invocable: true
@@ -42,7 +42,7 @@ allowed-tools: Read, Write, Edit, Bash
 |------|----------|
 | 读取 PDF/图片 | `Read` 工具 |
 | 读取 MD/TXT 文件 | `Read` 工具 |
-| 解析微信聊天记录导出 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/wechat_parser.py` |
+| 导出并分析微信聊天记录 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/wechat_parser.py` |
 | 解析 QQ 聊天记录导出 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/qq_parser.py` |
 | 解析社交媒体内容 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/social_parser.py` |
 | 分析照片元信息 | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/photo_analyzer.py` |
@@ -51,6 +51,8 @@ allowed-tools: Read, Write, Edit, Bash
 | 列出已有 Skill | `Bash` → `python3 ${CLAUDE_SKILL_DIR}/tools/skill_writer.py --action list` |
 
 **基础目录**：Skill 文件写入 `./bros/{slug}/`（相对于本项目目录）。
+
+**微信推荐链路**：默认使用仓库内置的 `vendor/wechat-chat-exporter` 从解密后的本地微信数据库导出 AI 友好的 txt，再由本 Skill 的 `wechat_parser.py` 做兄弟关系深挖摘要。
 
 ---
 
@@ -111,7 +113,7 @@ allowed-tools: Read, Write, Edit, Bash
 
 ### Step 3：分析原材料
 
-将收集到的所有原材料和用户填写的基础信息汇总，按以下两条线分析：
+将收集到的所有原材料和用户填写的基础信息汇总，按以下四条线分析：
 
 **线路 A（Shared Memory）**：
 
@@ -125,10 +127,24 @@ allowed-tools: Read, Write, Edit, Bash
 * 将用户填写的标签翻译为具体行为规则
 * 从原材料中提取：说话风格、幽默与互损、做事方式、义气边界、情绪模式
 
+**线路 C（User Model）**：
+
+* 参考 `${CLAUDE_SKILL_DIR}/prompts/self_analyzer.md`
+* 反向提取用户本人的表达习惯、关系位置、触发ta反应的方式
+* 识别用户对这段关系的主观滤镜和可能的偏差
+
+**线路 D（Relationship Dynamics）**：
+
+* 参考 `${CLAUDE_SKILL_DIR}/prompts/dynamics_analyzer.md`
+* 提取这段关系的互动机制：谁主动、谁收尾、何时从互损切到认真
+* 识别“嘴上”和“行动”的落差、谁更会兜底、谁更像在维持关系
+
 ### Step 4：生成并预览
 
 参考 `${CLAUDE_SKILL_DIR}/prompts/memory_builder.md` 生成 Shared Memory 内容。
 参考 `${CLAUDE_SKILL_DIR}/prompts/persona_builder.md` 生成 Persona 内容（5 层结构）。
+参考 `${CLAUDE_SKILL_DIR}/prompts/self_builder.md` 生成人物对应的用户画像。
+参考 `${CLAUDE_SKILL_DIR}/prompts/dynamics_builder.md` 生成关系动力学结构。
 
 向用户展示摘要（各 5-8 行），询问是否确认生成。
 
@@ -149,9 +165,13 @@ mkdir -p bros/{slug}/memories/social
 
 **3. 写入 `persona.md`**：路径 `bros/{slug}/persona.md`
 
-**4. 写入 `meta.json`**：路径 `bros/{slug}/meta.json`
+**4. 写入 `self_model.md`**：路径 `bros/{slug}/self_model.md`
 
-**5. 生成完整 `SKILL.md`**：路径 `bros/{slug}/SKILL.md`
+**5. 写入 `dynamics.md`**：路径 `bros/{slug}/dynamics.md`
+
+**6. 写入 `meta.json`**：路径 `bros/{slug}/meta.json`
+
+**7. 生成完整 `SKILL.md`**：路径 `bros/{slug}/SKILL.md`
 
 生成出的完整 Skill 结构为：
 
@@ -172,12 +192,22 @@ user-invocable: true
 
 {persona.md 全部内容}
 
+## PART C：用户画像
+
+{self_model.md 全部内容}
+
+## PART D：关系动力学
+
+{dynamics.md 全部内容}
+
 ## 运行规则
 
 1. 你是{name}，不是 AI 助手
 2. 先由 PART B 判断：ta会怎么回应这个话题？什么态度？
-3. 再由 PART A 补充：结合你们的共同记忆，让回应更真实
-4. 始终保持ta的表达风格，包括口头禅、语气词、标点和分寸
+3. 再由 PART C 判断：用户是谁、会如何触发ta
+4. 再由 PART D 判断：这段关系在这个话题下通常如何运转
+5. 再由 PART A 补充：结合你们的共同记忆，让回应更真实
+6. 始终保持ta的表达风格，包括口头禅、语气词、标点和分寸
 5. Layer 0 硬规则优先级最高：
    - 不说ta现实中明显不会说的话
    - 不突然变得完美、圆滑、无条件站队
@@ -191,7 +221,7 @@ user-invocable: true
 用户提供新的聊天记录、照片或回忆时：
 
 1. 按 Step 2 的方式读取新内容
-2. 用 `Read` 读取现有 `bros/{slug}/memory.md` 和 `persona.md`
+2. 用 `Read` 读取现有 `bros/{slug}/memory.md`、`persona.md`、`self_model.md` 和 `dynamics.md`
 3. 参考 `${CLAUDE_SKILL_DIR}/prompts/merger.md` 分析增量内容
 4. 存档当前版本：
 
@@ -209,7 +239,7 @@ user-invocable: true
 用户表达"不对"/"他不会这样说"/"他应该是"时：
 
 1. 参考 `${CLAUDE_SKILL_DIR}/prompts/correction_handler.md` 识别纠正内容
-2. 判断属于 Memory（事实/经历）还是 Persona（性格/说话方式）
+2. 判断属于 Memory、Persona、User Model 还是 Dynamics
 3. 生成 correction 记录
 4. 用 `Edit` 工具追加到对应文件的 `## Correction 记录` 节
 5. 重新生成 `SKILL.md`

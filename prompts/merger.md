@@ -2,7 +2,7 @@
 
 ## 任务
 
-当用户追加新的原材料时，将增量信息 merge 进现有的 `memory.md` 和 `persona.md`，不覆盖已有结论。
+当用户追加新的原材料时，将增量信息 merge 进现有的 `memory.md`、`persona.md`、`self_model.md` 和 `dynamics.md`，不覆盖已有结论。
 
 ## 原则
 
@@ -15,7 +15,7 @@
 
 ### 1. 分析增量内容
 
-将新材料按 `memory_analyzer.md` 和 `persona_analyzer.md` 的维度分析，输出：
+将新材料按 `memory_analyzer.md`、`persona_analyzer.md`、`self_analyzer.md` 和 `dynamics_analyzer.md` 的维度分析，输出：
 - 新的记忆事件
 - 新的性格证据
 - 与现有内容的一致性/冲突
@@ -34,6 +34,16 @@
 - 更充分的做事方式证据 → 强化 Layer 3 描述
 - 新的边界和关系行为 → 追加到 Layer 4
 - Layer 0/1 通常不变（除非用户明确纠正）
+
+**User Model（用户画像类）**：
+- 新的用户表达习惯 → 追加到说话方式
+- 新的触发模式 → 补到“你会触发他什么反应”
+- 新的自我描述偏差 → 更新主观滤镜提醒
+
+**Dynamics（关系动力学类）**：
+- 新的主动/收尾证据 → 更新互动机制
+- 新的嘴上/行动反差证据 → 更新动力学规则
+- 新的阶段变化 → 补到关系阶段变化
 
 ### 3. 输出
 

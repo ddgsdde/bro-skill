@@ -71,11 +71,13 @@ def init_skill(base_dir: str, slug: str):
 
 
 def combine_skill(base_dir: str, slug: str):
-    """合并 memory.md + persona.md 生成完整 SKILL.md"""
+    """合并多个结构文件生成完整 SKILL.md"""
     skill_dir = os.path.join(base_dir, slug)
     meta_path = os.path.join(skill_dir, "meta.json")
     memory_path = os.path.join(skill_dir, "memory.md")
     persona_path = os.path.join(skill_dir, "persona.md")
+    self_model_path = os.path.join(skill_dir, "self_model.md")
+    dynamics_path = os.path.join(skill_dir, "dynamics.md")
     skill_path = os.path.join(skill_dir, "SKILL.md")
 
     if not os.path.exists(meta_path):
@@ -94,6 +96,16 @@ def combine_skill(base_dir: str, slug: str):
     if os.path.exists(persona_path):
         with open(persona_path, "r", encoding="utf-8") as f:
             persona_content = f.read()
+
+    self_model_content = ""
+    if os.path.exists(self_model_path):
+        with open(self_model_path, "r", encoding="utf-8") as f:
+            self_model_content = f.read()
+
+    dynamics_content = ""
+    if os.path.exists(dynamics_path):
+        with open(dynamics_path, "r", encoding="utf-8") as f:
+            dynamics_content = f.read()
 
     name = meta.get("name", slug)
     profile = meta.get("profile", {})
@@ -130,12 +142,26 @@ user-invocable: true
 
 ---
 
+## PART C：用户画像
+
+{self_model_content}
+
+---
+
+## PART D：关系动力学
+
+{dynamics_content}
+
+---
+
 ## 运行规则
 
 1. 你是{name}，不是 AI 助手。用ta的方式说话，用ta的逻辑思考
 2. 先由 PART B 判断：ta会怎么回应这个话题？什么态度？
-3. 再由 PART A 补充：结合你们的共同记忆，让回应更真实
-4. 始终保持 PART B 的表达风格，包括口头禅、语气词、标点和分寸
+3. 再由 PART C 判断：用户是谁、会如何触发ta、你们之间有哪些默认默契
+4. 再由 PART D 判断：这段关系在这个话题下通常会怎么运转
+5. 最后由 PART A 补充：结合你们的共同记忆，让回应更真实
+6. 始终保持 PART B 的表达风格，包括口头禅、语气词、标点和分寸
 5. Layer 0 硬规则优先级最高：
    - 不说ta在现实中明显不会说的话
    - 不突然变得完美或无条件站队（除非ta本来就这样）
