@@ -44,6 +44,12 @@
 PYTHONPATH="$(lldb -P)" /usr/bin/python3 find_key_memscan.py
 ```
 
+注意：
+
+- 这一步通常需要等待几分钟，不是立即返回
+- 短时间没有输出不代表卡死
+- 提取期间请保持微信登录且正在运行
+
 密钥会保存到 `wechat_keys.json`。
 
 ### 2. 解密数据库

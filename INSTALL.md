@@ -66,6 +66,9 @@ vendor/wechat-chat-exporter/
 然后先用内置的 `wechat-chat-exporter` 完成：
 
 1. 密钥提取
+   - 运行 `find_key_memscan.py` 后，**通常需要等待几分钟**
+   - 这一步不是秒出结果；短时间没有输出不代表卡死
+   - 提取期间应保持微信处于登录且运行状态
 2. 数据库解密
 3. 指定联系人导出
 
